@@ -10,6 +10,10 @@ import (
 // CattleSpec defines the desired state of Cattle
 // +k8s:openapi-gen=true
 type CattleSpec struct {
+	Name      string   `json:"name"`
+	Image     string   `json:"image"`
+	Size      int32    `json:"size"`
+	BeefParts []string `json:"beefParts"`
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book.kubebuilder.io/beyond_basics/generating_crd.html

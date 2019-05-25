@@ -54,13 +54,43 @@ operator-sdk add api --api-version=${API_VERSION} --kind=${CRD}
 operator-sdk add controller --api-version=${API_VERSION} --kind=${CRD}
 ```
 
-# Update CRD
-
-```
 # Update CRD definition
+
+Add Spec to Cattle
+```
 vim pkg/apis/cattle/v1alpha1/cattle_types.go
 
+type CattleSpec struct {
+	Name      string   `json:"name"`
+	Size      int32    `json:"size"`
+	BeefParts []string `json:"beefParts"`
+}
+
+make generate
+```
+
+Add angus-cattle resource
+```
+cp deploy/crds/cattle_v1apha1_cattle_cr.yaml deploy/crds/angus_cattle_cr.yaml
+vim deploy/crds/angus_cattle_cr.yaml
+
+apiVersion: cattle.chechiachang.com/v1alpha1
+kind: Cattle
+metadata:
+  name: angus-cattle
+spec:
+  # Add fields here
+  name: angus
+  beatParts:
+  - chuck
+  - rib
+  - plate
+  size: 3
+```
+
 # Update controller reconcile logic
+
+```
 vim pkg/controller/cattle/cattle_controller.go
 
 make generate
@@ -75,3 +105,8 @@ kubectl apply -f deploy/crds/cattle_v1alpha1_cattle_crd.yaml
 kubectl apply -f deploy
 ```
 
+# Apply angus-cattle CR
+
+```
+kubectl apply -f deploy/crds/angus_cattle_cr.yaml
+```
