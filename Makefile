@@ -2,7 +2,7 @@ SHELL:=/bin/bash
 UNAME_S := $(shell uname -s)
 
 container_registry_host = asia.gcr.io
-gcp_project = chechaichang-123
+gcp_project = chechaichang
 operator_name = cattle-operator
 
 git_branch_name = $(shell git rev-parse --abbrev-ref HEAD)
@@ -17,13 +17,14 @@ image_version = $(git_branch_name)-$(git_commit_sha)
 
 .PHONY: build tag generate
 
-dep:
-	dep ensure
+mod:
+	go mod download
+	go mod vendor
 
 generate:
 	operator-sdk generate k8s
 
-local: generate
+local: mod generate
 	OPERATOR_NAME=$(operator_name) operator-sdk up local --namespace=default
 
 build: generate
