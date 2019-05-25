@@ -96,7 +96,27 @@ vim pkg/controller/cattle/cattle_controller.go
 make generate
 ```
 
+---
+
+# Test
+
+Test on a local cluster
+```
+make local
+```
+
+# Build Image
+
+```
+make build push
+```
+
 # Deploy to kubernetes
+
+Update image tag
+```
+make tag
+```
 
 (Grant extra privilege for serviceaccount rulebinding)
 
