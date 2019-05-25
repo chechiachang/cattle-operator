@@ -53,3 +53,25 @@ CRD=Cattle
 operator-sdk add api --api-version=${API_VERSION} --kind=${CRD}
 operator-sdk add controller --api-version=${API_VERSION} --kind=${CRD}
 ```
+
+# Update CRD
+
+```
+# Update CRD definition
+vim pkg/apis/cattle/v1alpha1/cattle_types.go
+
+# Update controller reconcile logic
+vim pkg/controller/cattle/cattle_controller.go
+
+make generate
+```
+
+# Deploy to kubernetes
+
+(Grant extra privilege for serviceaccount rulebinding)
+
+```
+kubectl apply -f deploy/crds/cattle_v1alpha1_cattle_crd.yaml
+kubectl apply -f deploy
+```
+

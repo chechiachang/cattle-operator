@@ -1,4 +1,4 @@
-module github.com/chechiachang/cattle-operator/cattle-operator
+module github.com/chechiachang/cattle-operator
 
 require (
 	contrib.go.opencensus.io/exporter/ocagent v0.4.9 // indirect

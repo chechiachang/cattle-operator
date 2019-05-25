@@ -1,0 +1,7 @@
+apiVersion: cattle.chechiachang.com/v1alpha1
+kind: Cattle
+metadata:
+  name: example-cattle
+spec:
+  # Add fields here
+  size: 3
